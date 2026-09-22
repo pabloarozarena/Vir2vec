@@ -1,0 +1,26 @@
+# OS / Editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Python & Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data splits & sequence files
+data/train/
+data/test/
+data/validation/
+*.fasta
+data/**/*.txt
+
+# Exclude checkpoint / model weight outputs
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+checkpoints/
+outputs/
+logs/

@@ -1,0 +1,48 @@
+# Vir2vec dependencies
+# Generated from a static audit of scripts/train_vir2vec*.py and notebooks/**/*.ipynb
+# (2026-09-22). Versions are pinned to what was verified against the live
+# pabloarozarenad/Vir2vec and pabloarozarenad/vGUE-benchmark HF repos in the
+# `vir2vec` conda environment on HiPerGator; adjust the torch/CUDA build for
+# your own accelerator.
+
+# --- Core ML stack ---
+torch>=2.4,<2.13
+transformers>=4.46,<5.13
+datasets>=2.20,<5.1
+tokenizers>=0.20
+accelerate>=0.34
+huggingface_hub>=0.25
+
+# --- Training scripts (scripts/train_vir2vec*.py) ---
+wandb>=0.17                 # imported even though WANDB_DISABLED=true is set
+# flash-attn is optional: scripts fall back to attn_implementation="eager"
+# when it isn't importable. Install only on a CUDA build-capable GPU node
+# (it compiles from source and needs a matching torch/CUDA toolkit):
+#   pip install flash-attn --no-build-isolation
+flash-attn>=2.6; sys_platform == "linux"
+
+# --- Embedding extraction notebooks (notebooks/embeddings/*.ipynb) ---
+h5py>=3.11
+tqdm>=4.66
+# Evo baseline (notebooks/embeddings/evo_embs.ipynb) — heavy, StripedHyena-based,
+# GPU/flash-attn required; only needed if you run that specific notebook:
+evo-model>=0.1; sys_platform == "linux"
+
+# --- Classifier / anomaly-detection notebooks (notebooks/classifiers/*.ipynb) ---
+scikit-learn>=1.4
+xgboost>=2.0
+
+# --- Explainability notebook (notebooks/02_explainability_routing.ipynb) ---
+biopython>=1.83
+shap>=0.45
+matplotlib>=3.8
+scipy>=1.11
+
+# --- General ---
+numpy>=1.26,<3
+pandas>=2.1
+pyyaml>=6.0
+
+# --- Running the notebooks themselves ---
+jupyterlab>=4.0
+ipykernel>=6.29
