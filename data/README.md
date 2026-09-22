@@ -1,6 +1,4 @@
-# Dataset Directory Setup
 
-Large sequence text files are excluded from Git tracking (see repo `.gitignore`: `data/train/`, `data/test/`, `data/validation/`, `*.fasta`, `*.txt`).
 
 ## Pretraining corpus
 
@@ -24,25 +22,6 @@ ACGTACGT...
 TTGCATGC...
 ```
 
-If you are staging raw per-source sequence files before building those CSVs, organize them as:
-
-```text
-data/
-├── train/
-│   ├── train__BV-BRC.txt
-│   ├── train__GISAID.txt
-│   ├── train__HBVdb.txt
-│   ├── train__LANL-HIV-DB.txt
-│   └── train__NCBI_virus.txt
-├── validation/
-│   ├── val__BV-BRC.txt
-│   └── ...
-└── test/
-    ├── test__BV-BRC.txt
-    └── ...
-```
-
-Each `.txt` file is one FASTA-derived nucleotide sequence per line, source-tagged by filename (`<split>__<repository>.txt`). Convert these into the `Sequence`-column CSVs the training scripts expect before running `scripts/train_vir2vec*.py`.
 
 ## vGUE benchmark data
 
@@ -62,9 +41,3 @@ ds = load_dataset("pabloarozarenad/vGUE-benchmark", "dna_rna", split="test")
 | `sarscov2_subtyping` | SARS-CoV-2 lineage subtyping (7 clades) |
 | `host_prediction` | Broad host-range classification |
 | `hiv1_tropism` | HIV-1 tissue tropism (brain vs. non-brain) |
-
-> **Known issue (as of this audit):** the dataset card's declared schema (`Sequence: string`, `label: int64`) does not match the actual parquet columns (`sequence: string`, `label: string`) for all 7 subsets, so `load_dataset()` currently raises a `CastError`. See `AUDIT_REPORT.md` in the working directory for the exact diagnosis and fix.
-
-## Local `.h5` embedding files
-
-`notebooks/embeddings/*.ipynb` write per-task embedding matrices to local HDF5 files (not tracked in Git — add `*.h5` to `.gitignore` if you keep them alongside the repo). `notebooks/classifiers/*.ipynb` read these back from a relative `../embeddings/<task>_<model>.h5` path; keep the naming consistent between the two notebook stages or adjust the `H5_PATH` constant in each classifier notebook.
