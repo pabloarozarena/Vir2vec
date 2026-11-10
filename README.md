@@ -10,7 +10,7 @@ Alongside the model, this repository hosts the **viral Genome Understanding Eval
 
 | Resource | Link | Notes |
 | :--- | :--- | :--- |
-| Vir2vec model | [`pabloarozarenad/Vir2vec`](https://huggingface.co/pabloarozarenad/Vir2vec) | **Gated** (manual approval). `main` branch = 422M; `revision="138M"` / `revision="17M"` for smaller scales. |
+| Vir2vec model | [`pabloarozarenad/Vir2vec`](https://huggingface.co/pabloarozarenad/Vir2vec) | `main` branch = 422M; `revision="138M"` / `revision="17M"` for smaller scales. |
 | vGUE benchmark | [`pabloarozarenad/vGUE-benchmark`](https://huggingface.co/datasets/pabloarozarenad/vGUE-benchmark) | 7 task subsets, public. |
 
 Baselines compared against in the paper: [Mistral-DNA](https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-422M-hg38) (human-trained), [ModernBERT-DNA-virus](https://huggingface.co/RaphaelMourad/ModernBert-DNA-v1-37M-virus) (viral-specific), and Evo-1 (7B-parameter prokaryotic/phage model).
